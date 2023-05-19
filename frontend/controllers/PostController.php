@@ -14,26 +14,34 @@
     class PostController extends Controller{
     
         public function actionIndex(){
-            $posts = Post::find()->all();
-            $brands = Brands::find()->all();
-            $models = Models::find()->all();
-            $bodies = Bodies::find()->all();
-            $colors = Colors::find()->all();
-            $engines = Engines::find()->all();
-            $gearboxes = Gearboxes::find()->all();
+            $posts = Post::find()
+            ->joinWith('models')
+            ->joinWith('models')
+            ->joinWith('models')
+            ->all();
+            // $brands = Brands::find()->all();
+            // $models = Models::find()->all();
+            // $bodies = Bodies::find()->all();
+            // $colors = Colors::find()->all();
+            // $engines = Engines::find()->all();
+            // $gearboxes = Gearboxes::find()->all();
             
             // Yii::$app->response->format=\yii\web\Responce::FORMAT_HTML;
-            $posts=Post::find()
+
+
+                     // ->leftJoin( 'brands', '`brands`.`id`=`post`.`id_brand`')
+            // ->join('join', 'models', '`models`.`id`=`post`.`id_model`')
+            // ->join('join', 'engines', '`engines`.`id`=`post`.`id_engine`')
+            // ->join('join', 'bodies', '`bodies`.`id`=`post`.`id_body`')
+            // ->join('join', 'gearboxes', '`gearboxes`.`id`=`post`.`id_gearbox`')
+
             
-            ->select('`post`.`id`, `Brand`, `Model`, `Engine`, `Body`, `Gearbox`, `Color`, `City`, `Year`, `Price`, `Run`, `Date`, `Photo`')
-            ->join('join', 'brands', '`brands`.`id`=`post`.`id_brand`')
-            ->join('join', 'models', '`models`.`id`=`post`.`id_model`')
-            ->join('join', 'engines', '`engines`.`id`=`post`.`id_engine`')
-            ->join('join', 'bodies', '`bodies`.`id`=`post`.`id_body`')
-            ->join('join', 'gearboxes', '`gearboxes`.`id`=`post`.`id_gearbox`')
-            ->join('join', 'colors', '`colors`.`id`=`post`.`id_color`')
-            ->orderBy('Date DESC')
-            ->all();
+            // $posts=Post::find()
+            // // ->select('`post`.`id`, `Brand`, `Model`, `Engine`, `Body`, `Gearbox`, `Color`, `City`, `Year`, `Price`, `Run`, `Date`, `Photo`')
+            // // ->leftJoin('colors', '`colors`.`id`=`post`.`id_color`')
+            // ->joinWith('models')
+            // ->orderBy('Date DESC')
+            // ->all();
             return $this->render('index',['posts'=>$posts]);
         }
     }

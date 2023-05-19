@@ -16,8 +16,12 @@
         public function actionIndex(){
             $posts = Post::find()
             ->joinWith('models')
-            ->joinWith('models')
-            ->joinWith('models')
+            ->joinWith('brands')
+            ->joinWith('engines')
+            ->joinWith('bodies')
+            ->joinWith('gearboxes')
+            ->joinWith('colors')
+            ->joinWith('users')
             ->all();
             // $brands = Brands::find()->all();
             // $models = Models::find()->all();

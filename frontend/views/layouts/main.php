@@ -5,6 +5,7 @@
 
 use common\widgets\Alert;
 use frontend\assets\AppAsset;
+use frontend\models\Menu;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
@@ -34,12 +35,23 @@ AppAsset::register($this);
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-        ['label' => 'Бренды', 'url' => ['/brands/index']],
-    ];
+    // $menuItems = [
+    //     ['label' => 'Home', 'url' => ['/site/index']],
+    //     ['label' => 'About', 'url' => ['/site/about']],
+    //     ['label' => 'Contact', 'url' => ['/site/contact']],
+    //     ['label' => 'Бренды', 'url' => ['/brands/index']],
+    //     ['label' => 'Машины', 'url' => ['/post/index']],
+    // ];
+    $menuItems = [];
+    
+    $menuItems2=Menu::find()->all();
+        
+    foreach ($menuItems2 as $menuItem ) {
+            array_push($menuItems, ['label' => $menuItem->Title, 'url' =>[$menuItem->Path]]);
+    };
+
+
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
     }

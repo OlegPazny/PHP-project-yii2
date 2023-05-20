@@ -1,3 +1,10 @@
+.post-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-content: stretch;
+    height: 25%;
+}
 .post-section{
     margin-top:2%;
     margin-left:12%;
@@ -49,12 +56,4 @@ figure img{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-}
-.post-container{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-content: stretch;
-    height: 25%;
-    
 }

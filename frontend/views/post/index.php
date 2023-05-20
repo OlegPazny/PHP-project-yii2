@@ -4,7 +4,7 @@
     //     echo $brand->Brand;
     // }
 
-    echo "<div class='last-post-container'>";
+    echo "<div class='post-container'>";
     foreach ($posts as $post){
         echo 
             '<a>

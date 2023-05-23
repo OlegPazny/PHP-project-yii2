@@ -22,8 +22,16 @@ class User extends \yii\web\User
     {
         return \Yii::$app->user->identity->email;
     }
+    public function getNumber()
+    {
+        return \Yii::$app->user->identity->number;
+    }
     public function getLiked()
     {
-        return \Yii::$app->user->identity->liked;
+        return \Yii::$app->user->identity->Liked;
+    }
+    public function getAdmin()
+    {
+        return \Yii::$app->user->identity->isadmin;
     }
 }

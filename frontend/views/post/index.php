@@ -1,8 +1,9 @@
 <?php
+use yii\helpers\Url;
     echo "<div class='post-container'>";
     foreach ($posts as $post){
         echo 
-            '<a>
+            '<a href="'.Url::to(['carpost/index', 'id' => $post->id]).'">
             <div class="post">
                 <figure>
                     <img src="'.$post->Photo.'">
@@ -16,7 +17,6 @@
                 </div>
             </div>
         </a>';
-
     };
     echo "</div>";
 ?>

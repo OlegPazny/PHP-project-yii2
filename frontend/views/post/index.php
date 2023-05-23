@@ -1,9 +1,4 @@
 <?php
-    // foreach($brands as $brand){
-    //     echo $brand->Label;
-    //     echo $brand->Brand;
-    // }
-
     echo "<div class='post-container'>";
     foreach ($posts as $post){
         echo 

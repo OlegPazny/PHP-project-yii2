@@ -1,3 +1,6 @@
+<?php
+/** @var yii\web\View $this */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

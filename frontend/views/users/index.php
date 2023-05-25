@@ -10,9 +10,9 @@
         <h1>Аккаунт</h1>
         <div class="info-container">
             <div>
-                <h2>Имя: <?php echo(\Yii::$app->user->username)?></h2>
-                <h2>Email: <?php echo(\Yii::$app->user->email)?></h2>
-                <h2>Номер телефона: <?php echo(\Yii::$app->user->number)?></h2>
+                <h2>Имя: <?php echo(\Yii::$app->user->identity->username)?></h2>
+                <h2>Email: <?php echo(\Yii::$app->user->identity->email)?></h2>
+                <h2>Номер телефона: <?php echo(\Yii::$app->user->identity->number)?></h2>
             </div>
             <form action="add_car.php">
                 <button class="new-post-btn" type="submit">Создать объявление</button>
@@ -21,7 +21,27 @@
     </section>
     <section class="saved-section">
         <h1>Избранное</h1>
-        <span id="anchor"></span>
+    </section>
+    <section class="saved-section">
+        <h1>Мои автомобили</h1>
+        <section class="saved-section">
+        <h3>Мои платья</h3>
+            <?php 
+            foreach ($userPosts as $userPost)
+            {
+        ?>
+        <div class="dressCard">
+            <div class="dressId">
+                <?= $userPost->ID_User ?>
+                <?= $userPost->Run ?>
+                
+            </div>
+
+        </div>
+
+        <?php 
+    }
+    ?>
     </section>
 </body>
 </html>

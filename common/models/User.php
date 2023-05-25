@@ -7,6 +7,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use app\models\Post;
 
 /**
  * User model
@@ -209,5 +210,24 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+    public function getUserPosts(){
+        // $userDresses = Dress::find() 
+        // ->join('inner join', 
+        //        'dressType',
+        //        'dressType.dressTypeId = dress.dressTypeId'
+        //    )
+        // ->join('inner join', 
+        //        'color',
+        //        'color.colorId = dress.colorId'
+        //    )->all();
+
+        $userPosts = Post::find()
+            ->select('post.*')
+            ->where(['Post.ID_User'=> $this->getId()])
+            ->all();
+
+
+        return $userPosts;
     }
 }

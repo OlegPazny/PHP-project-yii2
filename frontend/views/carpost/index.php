@@ -1,5 +1,9 @@
 <?php
 /** @var yii\web\View $this */
+$data_usd=file_get_contents(USD);//апишка usd
+$data_eur=file_get_contents(EUR);//апишка eur
+$courses_usd=json_decode($data_usd, true);
+$courses_eur=json_decode($data_eur, true);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +32,11 @@
                 </figure>
                 <div class="carpost-info">
                     <div class="carpost-data">
-                        <h2><?php foreach($posts as $post){echo($post->Price);}?>$</h2>
+                        <div>
+                            <h2><?php foreach($posts as $post){echo($post->Price);}?> р.</h2>
+                            <p class="convertion"><?php foreach($posts as $post){echo(round(($post->Price)/$courses_usd["Cur_OfficialRate"]));}?>$</p>
+                            <p class="convertion"><?php foreach($posts as $post){echo(round(($post->Price)/$courses_eur["Cur_OfficialRate"]));}?>€</p>
+                        </div>
                         <h3><?php foreach($posts as $post){echo($post->Year);}?> г., КПП <?php foreach($posts as $post){echo($post->gearboxes->Gearbox);}?>, <?php foreach($posts as $post){echo($post->engines->Engine);}?>,<br/><?php foreach($posts as $post){echo($post->bodies->Body);}?>, <?php foreach($posts as $post){echo($post->Run);}?> км</h3>
                         <h3><?php foreach($posts as $post){echo($post->colors->Color);}?></h3>
                     </div>

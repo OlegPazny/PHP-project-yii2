@@ -1,6 +1,13 @@
 <?php
 use yii\helpers\html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Brands;
+use app\models\Models;
+use app\models\Engines;
+use app\models\Bodies;
+use app\models\Gearboxes;
+use app\models\Colors;
     $form=ActiveForm::begin();?>
     <div class="row">
         <div class="form-group">
@@ -12,43 +19,42 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <div class="form-group">
             <div class="col-lg-6">
-                <?php $items=['one'=>'айди1', 'two'=>'айди2', 'three'=>'айди3']?>
-                <?= $form->field($post, 'Description')->dropDownList($items, ['prompt'=>'Select']);?>
+                <?= $form->field($post, 'ID_Brand')->dropDownList(ArrayHelper::map(Brands::find()->select(['Brand','id'])->all(), 'id', 'Brand'),['class' => 'form-control inline-block']); ?>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="form-group">
             <div class="col-lg-6">
-                <?= $form->field($post, 'ID_Model');?>
+                <?= $form->field($post, 'ID_Model')->dropDownList(ArrayHelper::map(Models::find()->select(['Model','id'])->all(), 'id', 'Model'),['class' => 'form-control inline-block']); ?>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="form-group">
             <div class="col-lg-6">
-                <?= $form->field($post, 'ID_Engine');?>
+                <?= $form->field($post, 'ID_Engine')->dropDownList(ArrayHelper::map(Engines::find()->select(['Engine','id'])->all(), 'id', 'Engine'),['class' => 'form-control inline-block']); ?>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="form-group">
             <div class="col-lg-6">
-                <?= $form->field($post, 'ID_Body');?>
+                <?= $form->field($post, 'ID_Body')->dropDownList(ArrayHelper::map(Bodies::find()->select(['Body','id'])->all(), 'id', 'Body'),['class' => 'form-control inline-block']); ?>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="form-group">
             <div class="col-lg-6">
-                <?= $form->field($post, 'ID_Gearbox');?>
+            <?= $form->field($post, 'ID_Gearbox')->dropDownList(ArrayHelper::map(Gearboxes::find()->select(['Gearbox','id'])->all(), 'id', 'Gearbox'),['class' => 'form-control inline-block']); ?>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="form-group">
             <div class="col-lg-6">
-                <?= $form->field($post, 'ID_Color');?>
+            <?= $form->field($post, 'ID_Color')->dropDownList(ArrayHelper::map(Colors::find()->select(['Color','id'])->all(), 'id', 'Color'),['class' => 'form-control inline-block']); ?>
             </div>
         </div>
     </div>
@@ -90,8 +96,7 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <div class="form-group">
             <div class="col-lg-6">
-                <?php $items=['one'=>'one', 'two'=>'two', 'three'=>'three']?>
-                <?= $form->field($post, 'Description')->dropDownList($items, ['prompt'=>'Select']);?>
+                <?= $form->field($post, 'Description');?>
             </div>
         </div>
     </div>

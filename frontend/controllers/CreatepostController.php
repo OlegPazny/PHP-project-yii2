@@ -32,7 +32,13 @@ class CreatepostController extends \yii\web\Controller
         return $this->render('index',['post'=>$post]);
     }
     public function actionCreate(){
-        
+        // $model=new AreaModel();
+
+        // $model_state=StateModel::find()->orderBy('nameRu ASC')->all();
+        // foreach($model_)
+    }
+    public function actionUpdate(){
+
     }
 
 }

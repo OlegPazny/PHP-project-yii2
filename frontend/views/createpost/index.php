@@ -12,7 +12,8 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <div class="form-group">
             <div class="col-lg-6">
-                <?= $form->field($post, 'ID_Brand');?>
+                <?php $items=['one'=>'айди1', 'two'=>'айди2', 'three'=>'айди3']?>
+                <?= $form->field($post, 'Description')->dropDownList($items, ['prompt'=>'Select']);?>
             </div>
         </div>
     </div>

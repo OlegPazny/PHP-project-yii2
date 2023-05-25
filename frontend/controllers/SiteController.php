@@ -20,6 +20,11 @@ use frontend\models\Menu;
 /**
  * Site controller
  */
+
+ //ДОБАВИЛИ!
+/** @var yii\bootstrap5\ActiveForm $form */
+use yii\bootstrap5\ActiveForm;
+
 class SiteController extends Controller
 {
     /**
@@ -87,16 +92,46 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        // if (!Yii::$app->user->isGuest) {
+        //     return $this->goHome();
+        // }
+
+        // $model = new LoginForm();
+        // if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        //     return $this->goBack();
+        // }
+
+        // $model->password = '';
+
+        // return $this->render('login', [
+        //     'model' => $model,
+        // ]);
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
+        // if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        //     return $this->goBack();
+        // }
 
-        $model->password = '';
+        if ($model->load(Yii::$app->request->post())) {
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
+
+            if ($model->validate() && $model->login()){
+                Yii::$app->session->setFlash('success', 'You are authorized.'); 
+                return $this->redirect('?r=site/index');
+             } 
+            //  if (!$model->validate() && !$model->login()) {
+            //     return (($model -> password ='') && ($model -> username =''));
+            //  }
+        }
+        // $model->username = '';
+        // $model->password = '';
 
         return $this->render('login', [
             'model' => $model,
@@ -155,15 +190,38 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
+        // $model = new SignupForm();
+        // if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+        //     Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+        //     return $this->goHome();
+        // }
+
+        // return $this->render('signup', [
+        //     'model' => $model,
+        // ]);
+
+        //ДОБАВИЛИ
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
-            return $this->goHome();
+    
+        if ($model->load(Yii::$app->request->post())) {
+
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
+
+            if ($model->validate() && $model->signup()){
+                Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.'); 
+                return $this->redirect('?r=site/login');
+             } 
+
         }
 
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
+            return $this->render('signup', [
+                'model' => $model,
+            ]);
+
+
     }
 
     /**

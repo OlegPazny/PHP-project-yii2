@@ -1,13 +1,13 @@
 <?php
     namespace frontend\models;
     use yii\db\ActiveRecord;
-    use frontend\models\Brands;
-    use frontend\models\Models;
-    use frontend\models\Colors;
-    use frontend\models\Bodies;
-    use frontend\models\Engines;
-    use frontend\models\Gearboxes;
-    use frontend\models\Users;
+    use app\models\Brands;
+    use app\models\Models;
+    use app\models\Colors;
+    use app\models\Bodies;
+    use app\models\Engines;
+    use app\models\Gearboxes;
+    use app\models\Users;
 
     class Carpost extends ActiveRecord{
         public function getBrands(){

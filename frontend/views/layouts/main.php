@@ -45,6 +45,7 @@ AppAsset::register($this);
     $menuItems = [];
     
     $menuItems2=Menu::find()->all();
+
         
     foreach ($menuItems2 as $menuItem ) {
             array_push($menuItems, ['label' => $menuItem->Title, 'url' =>[$menuItem->Path]]);
@@ -55,6 +56,10 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
     }
+    else if (Yii::$app->user->identity->role == 'admin') {
+        $menuItems[] = ['label' => 'AdminPanel', 'url' => 
+    ['/admin']];
+     }
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],

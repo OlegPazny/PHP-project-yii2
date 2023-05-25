@@ -1,10 +1,6 @@
 <?php
-    // foreach($brands as $brand){
-    //     echo $brand->Label;
-    //     echo $brand->Brand;
-    // }
-
-    echo "<div class='brands-container'>";
+/** @var yii\web\View $this */
+echo "<div class='brands-container'>";
     foreach ($brands as $brand){
 
         echo 

@@ -1,4 +1,5 @@
 <?php
+/** @var yii\web\View $this */
 use yii\helpers\Url;
     echo "<div class='post-container'>";
     foreach ($posts as $post){

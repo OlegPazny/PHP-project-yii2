@@ -22,6 +22,7 @@ class CreatepostController extends \yii\web\Controller
         $formData=Yii::$app->request->post();
         if($post->load($formData)){
             if($post->save()){
+                $post->ID_User=Yii::$app->user->identity->id;
                 Yii::$app->getSession()->setFlash('message', 'Успешно');
                 return $this->redirect(['index']);
             }

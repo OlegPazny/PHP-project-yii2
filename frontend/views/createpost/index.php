@@ -9,10 +9,10 @@ use app\models\Bodies;
 use app\models\Gearboxes;
 use app\models\Colors;
     $form=ActiveForm::begin();?>
-    <div class="row">
+    <div class="row" style="display:none">
         <div class="form-group">
             <div class="col-lg-6">
-                <?= $form->field($post, 'ID_User');?>
+            <?= $form->field($post, 'ID_User')->textInput(['value'=>Yii::$app->user->identity->id])->label(false) ?>
             </div>
         </div>
     </div>

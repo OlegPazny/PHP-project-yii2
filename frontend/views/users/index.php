@@ -1,3 +1,4 @@
+<?php use yii\helpers\Url;?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,17 +25,18 @@
     </section>
     <section class="saved-section">
         <h1>Мои автомобили</h1>
-        <?php 
+        <?php
             foreach ($userPosts as $userPost)
             {
         ?>
+            <a href="<?php echo("/frontend/web/index.php?r=carpost%2Findex&id=".$userPost->id)?>">
                 <div class="post">
                     <figure>
                         <img src="<?= $userPost->Photo ?>">
                     </figure>
                     <div class="post-info">
                         <div class="post-txt">
-                            <h4><?= $userPost->brands->Brand ?>     <?= $userPost->models->Model ?></h4>
+                            <h4><?= $userPost->brands->Brand ?> <?= $userPost->models->Model ?></h4>
                             <h6>
                                 <?= $userPost->Price ?>
                             </h6>
@@ -46,7 +48,8 @@
                         </div>
                     </div>
                 </div>
-        <?php 
+            </a>
+        <?php
             }
         ?>
     </section>

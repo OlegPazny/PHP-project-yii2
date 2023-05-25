@@ -1,4 +1,5 @@
 <?php use yii\helpers\Url;?>
+<?php use yii\helpers\Html;?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +16,12 @@
                 <h2>Email: <?php echo(\Yii::$app->user->identity->email)?></h2>
                 <h2>Номер телефона: <?php echo(\Yii::$app->user->identity->number)?></h2>
             </div>
-            <form action="add_car.php">
-                <button class="new-post-btn" type="submit">Создать объявление</button>
-            </form>
+            <div>
+                <?= Html::a('Create', ['createpost/index'],['class'=>'btn btn-primary'])?>
+            </div>
+                <a href="<?php echo Url::to(['createpost/view', 'iduser' => \Yii::$app->user->identity->id]);;?>">
+                    <p>создать объявление</p>
+                </a>
         </div>
     </section>
     <section class="saved-section">

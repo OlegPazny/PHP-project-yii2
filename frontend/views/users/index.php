@@ -24,24 +24,31 @@
     </section>
     <section class="saved-section">
         <h1>Мои автомобили</h1>
-        <section class="saved-section">
-        <h3>Мои платья</h3>
-            <?php 
+        <?php 
             foreach ($userPosts as $userPost)
             {
         ?>
-        <div class="dressCard">
-            <div class="dressId">
-                <?= $userPost->ID_User ?>
-                <?= $userPost->Run ?>
-                
-            </div>
-
-        </div>
-
+                <div class="post">
+                    <figure>
+                        <img src="<?= $userPost->Photo ?>">
+                    </figure>
+                    <div class="post-info">
+                        <div class="post-txt">
+                            <h4><?= $userPost->brands->Brand ?>     <?= $userPost->models->Model ?></h4>
+                            <h6>
+                                <?= $userPost->Price ?>
+                            </h6>
+                            <h6>
+                                <?= $userPost->Year ?> г., <?= $userPost->gearboxes->Gearbox ?>,
+                                <?= $userPost->engines->Engine ?>, <?= $userPost->bodies->Body ?>,
+                                <?= $userPost->Run ?> км
+                            </h6>
+                        </div>
+                    </div>
+                </div>
         <?php 
-    }
-    ?>
+            }
+        ?>
     </section>
 </body>
 </html>

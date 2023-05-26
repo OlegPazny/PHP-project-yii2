@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Brands;
@@ -107,7 +108,7 @@ use app\models\Colors;
                     <?= Html::submitButton('Create Post', ['class'=>'btn btn-primary']);?>
                 </div>
                 <div class="col-lg-2">
-                    <a href=<?php echo yii::$app->homeUrl;?> class="btn btn-primary">GoBack</a>
+                    <a href=<?php echo Url::to(['users/index']);?> class="btn btn-primary">GoBack</a>
                 </div>
             </div>
         </div>

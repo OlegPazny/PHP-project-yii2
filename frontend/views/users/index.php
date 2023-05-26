@@ -19,9 +19,6 @@
             <div>
                 <?= Html::a('Create', ['createpost/index'],['class'=>'btn btn-primary'])?>
             </div>
-                <a href="<?php echo Url::to(['createpost/view', 'iduser' => \Yii::$app->user->identity->id]);;?>">
-                    <p>создать объявление</p>
-                </a>
         </div>
     </section>
     <section class="saved-section">

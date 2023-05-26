@@ -5,6 +5,10 @@ $data_eur=file_get_contents(EUR);//апишка eur
 $courses_usd=json_decode($data_usd, true);
 $courses_eur=json_decode($data_eur, true);
 ?>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +23,10 @@ $courses_eur=json_decode($data_eur, true);
                 <h1><?php foreach($posts as $post){echo($post->brands->Brand);}?> <?php foreach($posts as $post){echo($post->models->Model);}?>, <?php foreach($posts as $post){echo($post->Year);}?> года в г. <?php foreach($posts as $post){echo($post->City);}?></h1>
                 <div class="carpost-post-btns">
                     <img src="">
-                    <?php echo("Кнопка сохранить");?>
+                    <div class="like" style="cursor:pointer">
+                        <?php echo("Кнопка сохранить");?>
+                    </div>
+                    
                 </div>
             </div>
             <div class="carpost-data">
@@ -49,4 +56,46 @@ $courses_eur=json_decode($data_eur, true);
         </div>
     </section>
 </body>
+<script>
+    let icon = document.querySelector('.like');
+
+    function documentLoaded(){
+
+        $.ajax({
+            url: '?r=carpost/getlikestate',
+            type: 'post',
+            data: {posts_id: <?php foreach($posts as $post){echo($post->id);}?> },
+            success: function (data) {
+                if(data.state=='toggled-on'){
+                    icon.classList.add('toggled-on');
+                }
+                else{
+                    icon.classList.remove('toggled-on');
+                };
+            }
+        });
+    }
+
+
+    documentLoaded();
+
+    icon.onclick = function(){
+        //icon.classList.toggle('toggled-on');
+
+        $.ajax({
+            url: '?r=carpost/togglelike',
+            type: 'post',
+            data: {posts_id: <?php foreach($posts as $post){echo($post->id);}?> },
+            success: function (data) {
+                if(data.state=='toggled-on'){
+                    icon.classList.add('toggled-on');
+                }
+                else{
+                    icon.classList.remove('toggled-on');
+                }
+            }
+
+        });
+    }
+</script>
 </html>

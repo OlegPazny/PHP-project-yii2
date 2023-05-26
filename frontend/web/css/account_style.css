@@ -97,8 +97,9 @@ header{
 
 /* ИЗБРАННОЕ */
 .saved-section, .my-post-section{
-    margin-right:12%;
-    margin-left:12%;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .post{
     display: flex;

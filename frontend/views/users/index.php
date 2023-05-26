@@ -21,11 +21,9 @@
             </div>
         </div>
     </section>
+    <h1>Мои автомобили</h1>
     <section class="saved-section">
-        <h1>Избранное</h1>
-    </section>
-    <section class="saved-section">
-        <h1>Мои автомобили</h1>
+        
         <?php
             foreach ($userPosts as $userPost)
             {

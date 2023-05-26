@@ -8,6 +8,7 @@
     use app\models\Engines;
     use app\models\Gearboxes;
     use app\models\Users;
+    use app\models\Like;
 
     class Carpost extends ActiveRecord{
         public function getBrands(){
@@ -30,6 +31,9 @@
         }
         public function getUsers(){
             return $this->hasOne(Users::class, ['id'=>'ID_User']);
+        }
+        public function getLike(){
+            return $this->hasMany(Like::className(),['id'=>'post_id']);
         }
     }
 ?>

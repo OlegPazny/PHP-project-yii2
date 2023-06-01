@@ -33,7 +33,7 @@
             return $this->hasOne(Users::class, ['id'=>'ID_User']);
         }
         public function getLike(){
-            return $this->hasMany(Like::className(),['id'=>'post_id']);
+            return $this->hasMany(Like::class,['post_id'=>'id']);
         }
     }
 ?>

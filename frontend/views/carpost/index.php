@@ -16,6 +16,27 @@ $courses_eur=json_decode($data_eur, true);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<style>
+    ion-icon.like{
+    fill: black;
+    stroke: none;
+}
+ion-icon{
+    font-size: 50px;
+    fill: transparent;
+    stroke: black;
+    stroke-width: 30px;
+    transition: scale 0.2s;
+    width: 35px;
+
+}
+
+ion-icon:hover {
+    scale: 1.1;
+    transition: scale 0.2s;
+    cursor: pointer;
+}
+</style>
 <body>
     <section class="carpost">
         <div class="carpost-container">
@@ -23,8 +44,10 @@ $courses_eur=json_decode($data_eur, true);
                 <h1><?php foreach($posts as $post){echo($post->brands->Brand);}?> <?php foreach($posts as $post){echo($post->models->Model);}?>, <?php foreach($posts as $post){echo($post->Year);}?> года в г. <?php foreach($posts as $post){echo($post->City);}?></h1>
                 <div class="carpost-post-btns">
                     <img src="">
-                    <div class="like" style="cursor:pointer">
-                        <?php echo("Кнопка сохранить");?>
+                    <div class="large-font text-end top-20">
+                        <ion-icon name="heart">
+                            <div class="red-bg"></div>
+                        </ion-icon>
                     </div>
                     
                 </div>
@@ -56,45 +79,42 @@ $courses_eur=json_decode($data_eur, true);
         </div>
     </section>
 </body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script>
-    let icon = document.querySelector('.like');
-
+    let icon = document.querySelector('ion-icon');
     function documentLoaded(){
-
         $.ajax({
             url: '?r=carpost/getlikestate',
             type: 'post',
-            data: {posts_id: <?php foreach($posts as $post){echo($post->id);}?> },
+            data: {post_id: <?= $post->id ?> },
             success: function (data) {
-                if(data.state=='toggled-on'){
-                    icon.classList.add('toggled-on');
+                if(data.state =='like'){
+                    icon.classList.add('like');
                 }
                 else{
-                    icon.classList.remove('toggled-on');
-                };
+                    icon.classList.remove('like');
+                }
             }
         });
     }
-
-
     documentLoaded();
-
     icon.onclick = function(){
-        //icon.classList.toggle('toggled-on');
-
         $.ajax({
-            url: '?r=carpost/togglelike',
+            url: '?r=carpost/changelikestate',
             type: 'post',
-            data: {posts_id: <?php foreach($posts as $post){echo($post->id);}?> },
+            data: {post_id: <?= $post->id ?> },
             success: function (data) {
-                if(data.state=='toggled-on'){
-                    icon.classList.add('toggled-on');
+                if(data.state =='like' && data.status != false){
+                    icon.classList.add('like');
                 }
                 else{
-                    icon.classList.remove('toggled-on');
+                    icon.classList.remove('like');
+                }
+                if (data.status == false) {
+                    window.location.href = 'http://localhost/yii/frontend/web/index.php?r=site%2Flogin'
                 }
             }
-
         });
     }
 </script>

@@ -1,11 +1,11 @@
 <?php
     namespace app\models;
     use yii\db\ActiveRecord;
-    use frontend\models\Carpost;
+    use frontend\models\Post;
 
     class Like extends ActiveRecord{
         public function getPost(){
-            return $this->hasOne(Carpost::className(),['id'=>'post_id']);
+            return $this->hasOne(Post::class,['id'=>'post_id']);
         }
     }
 ?>

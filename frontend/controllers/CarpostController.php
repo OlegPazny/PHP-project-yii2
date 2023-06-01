@@ -27,62 +27,64 @@ class CarpostController extends \yii\web\Controller
             return $this->render('index',['posts'=>$posts]);
     }
 
-    public function actionGetlikestate(){
+    public function actionChangelikestate()
+    {
         if (Yii::$app->request->isAjax) {
-
+            $status=null;
             $data = Yii::$app->request->post();
-            $article_id = $data['article_id'];
-            $user_id = Yii::$app->user->identity->Id;
+            $post_id = $data['post_id'];
+            $user_id = Yii::$app->user->identity->id;
+            if($user_id == null) {
+                $status = false;
+            }
 
-            $like = Like::findOne(['article_id' => $article_id, 'user_id' => $user_id]);
+            $like = Like::findOne(['post_id' => $post_id, 'user_id' => $user_id]);
+            $class_name = 'like';
 
             if ($like) {
-                $state = 'toggled-on';
-            }
-            else{
-                $state = 'toggled-off';
-            }
-
-            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return[
-                'state'=>$state
-            ];
-        }
-    }
-
-    public function actionTogglelike()
-    {
-
-        if (Yii::$app->request->isAjax) {
-
-            $data = Yii::$app->request->post();
-            $post_id= $data['post_id'];
-            $user_id = Yii::$app->user->identity->Id;
-
-            $like=Like::findOne(['post_id'=>$post_id,'user_id'=>$user_id]);
-            $message='like on';
-            $class_name='toggled-on';
-
-            if($like){
-                $message='there is like';
-                $class_name='toggled-off';
+                $class_name = 'no_like';
                 $like->delete();
-            }
-            else{
-                $message='there is no like';
-                $class_name='toggled-on';
+            } else {
+                $class_name = 'like';
                 $new_like = new Like();
                 $new_like->post_id = $post_id;
                 $new_like->user_id = $user_id;
                 $new_like->save();
             }
-            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return [
-                'message' => $message,
-                'state'=>$class_name,
-                'code' => 100,
+                'state' => $class_name,
+                'status' => $status
+
             ];
         }
+    }
+
+    public function actionGetlikestate()
+    {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $post_id = $data['post_id'];
+            $user_id = Yii::$app->user->identity->id;
+
+            $like = Like::findOne(['post_id' => $post_id, 'user_id' => $user_id]);
+
+            if ($like) {
+                $state = 'like';
+            } else {
+                $state = 'no_like';
+            }
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return [
+                'state' => $state
+            ];
+        }
+    }
+
+    public function beforeAction($action)
+    {
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
     }
 
 }

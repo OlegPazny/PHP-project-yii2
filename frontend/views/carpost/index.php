@@ -45,7 +45,7 @@ ion-icon:hover {
                 <div class="carpost-post-btns">
                     <img src="">
                     <div class="large-font text-end top-20">
-                        <ion-icon name="heart">
+                        <ion-icon name="bookmark">
                             <div class="red-bg"></div>
                         </ion-icon>
                     </div>
